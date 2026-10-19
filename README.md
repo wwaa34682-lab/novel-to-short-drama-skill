@@ -61,6 +61,10 @@ git clone https://github.com/wwaa34682-lab/novel-to-short-drama-skill ~/.claude/
 - 请只改编你有权使用的作品，并遵守你所用平台的内容规范和版权要求。
 - 生成会花钱：技能默认复用优先、单条重出、不整批刷，被安全审核拦下最多改写一次。
 
+## 相关技能 / Related
+
+- [jianying-desktop-editing](https://github.com/wwaa34682-lab/jianying-desktop-editing)：后期剪辑的后续技能。步骤7 的视频在剪映里拼好后，用它按剧情配乐（BGM）、保存和交付核验。/ Editing follow-up: story-driven BGM scoring and delivery checks in JianYing desktop.
+
 ## License
 MIT，见 [LICENSE](LICENSE)。
 
