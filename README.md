@@ -1,11 +1,11 @@
-# novel-to-short-drama · 小说 → AI 短剧八步流水线技能
+# novel-to-short-drama · 小说 → AI 短剧七步流水线技能
 
-把小说/网文片段，按**八步死闸门**流程做成 AI 生成的竖屏/横屏短剧（短剧、漫剧、推文剧）。
+把小说/网文片段，按**七步死闸门**流程做成 AI 生成的竖屏/横屏短剧（短剧、漫剧、推文剧）。
 这是一个给 AI Agent 用的「技能包」：一份编排配方 `SKILL.md` + 每一步的模板和检查清单。全部来自真实项目里反复踩坑后定下的规矩。
 
 > 工具无关：出图、出视频可以用任何画布或 API。文中以 LibTV 画布 + Seedance 2.0 图生视频为例，具体参数写进你自己项目的 `STYLE-LOCK.md`。
 
-## 八步（上一步正式通过，才能开下一步）
+## 七步（上一步正式通过，才能开下一步）
 
 1. **改编**：原著 → 改编工作包。情节锁最高优先，事件、时间线、线索、动机、结局零偏差。
 2. **独立验收**：另起一个验收官，100 分制，**≥95 且无硬否决且每项达最低线**才算【正式验收通过】。没有「基本通过」。
@@ -14,7 +14,6 @@
 5. **资产**：人物白底四视图一张合成（正面全身/侧面/背面/正面半身）；能复用就不新建。
 6. **关键静帧 + 真实目视审查**：只出关键节拍，出完逐张放大对照错误清单审，不过就单张重出。
 7. **图生视频**：用户明确放行后才生成。一条一条来，提示词全文粘贴，只挂 1 张参考图（最多 2 张），@ 正确的资产（不 @ 空壳），成片按顺序排好。
-8. **后期剪辑成片**：AI 备齐素材（按序片段清单、字幕、配音台本、时间线表、封面），真人用剪映 / CapCut 等精剪。只用最新终版片段，严格按 Clip 顺序；后期加可读文字、配音心声、音乐音效、系列封面和片头片尾；按平台导出（例：16:9 素材套 9:16 竖屏外壳）。成片终检全过、用户确认后才发布。
 
 还有：台词风格指南（像真人说话、适量流行语、≤4 字/秒、可以跨条拆分）、打斗因果锁、风格锁模板、15 条通用错误台账。
 
@@ -31,9 +30,8 @@ templates/
   05-asset-four-view-prompt.md   # 步骤5 四视图/场景/道具提示词
   06-still-audit-checklist.md    # 步骤6 关键静帧 + 目视审查
   07-video-prompt.template.md    # 步骤7 图生视频提示词 + 生成前清单
-  08-edit-checklist.md           # 步骤8 素材清单 + 时间线表 + 成片终检（含待合并的剪辑研究占位）
   dialogue-style-guide.md        # 台词与心声风格
-  error-ledger.md                # 通用错误台账 G01–G20
+  error-ledger.md                # 通用错误台账 G01–G15
 examples/
   example-clip-prompt.md         # 一条虚构的步骤7 提示词示例
 ```
@@ -70,4 +68,4 @@ MIT，见 [LICENSE](LICENSE)。
 
 ## English summary
 
-**novel-to-short-drama** is an agent skill (Cursor / Claude-style `SKILL.md`) that turns novel excerpts into AI-generated short-drama episodes through an 8-step, hard-gated pipeline: (1) plot-locked adaptation, (2) independent 100-point QA (≥95, no hard veto, every category at its floor), (3) short-video pacing (action → obstacle → action, keep causal bridges and breathing beats), (4) ~15 s clip storyboards with ≥6 shots each and clip-to-clip handoff, (5) assets (one-image white-background four-view character sheets, reuse first), (6) key-beat stills plus a real visual audit, and (7) image-to-video only after explicit human go-ahead, one clip per video, full prompt pasted, one reference image, correct asset tags, and (8) post-production: the AI preps ordered latest-approved clips, subtitles, VO script, timeline sheet and cover, a human finishes the edit in CapCut/Jianying or any NLE, and a final QA checklist (clip order, no stale drafts, synced target-language subtitles, correct episode cover, series opening/ending, platform export such as a 9:16 shell for 16:9 sources) must pass before the user publishes. It ships a configurable style-lock template, a natural-dialogue guide, fight-scene causality rules, and a generic error ledger (G01–G20). Backend-agnostic (LibTV canvas + Seedance shown as an example). Docs are in Chinese. MIT licensed.
+**novel-to-short-drama** is an agent skill (Cursor / Claude-style `SKILL.md`) that turns novel excerpts into AI-generated short-drama episodes through a 7-step, hard-gated pipeline: (1) plot-locked adaptation, (2) independent 100-point QA (≥95, no hard veto, every category at its floor), (3) short-video pacing (action → obstacle → action, keep causal bridges and breathing beats), (4) ~15 s clip storyboards with ≥6 shots each and clip-to-clip handoff, (5) assets (one-image white-background four-view character sheets, reuse first), (6) key-beat stills plus a real visual audit, and (7) image-to-video only after explicit human go-ahead, one clip per video, full prompt pasted, one reference image, correct asset tags. It ships a configurable style-lock template, a natural-dialogue guide, fight-scene causality rules, and a generic 15-item error ledger. Backend-agnostic (LibTV canvas + Seedance shown as an example). Docs are in Chinese. MIT licensed.

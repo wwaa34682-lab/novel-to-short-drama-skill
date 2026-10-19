@@ -1,9 +1,9 @@
 ---
 name: novel-to-short-drama
-description: Use when turning a novel/web-fiction excerpt into an AI-generated vertical-platform short drama (短剧/漫剧) via an 8-step gated pipeline — adaptation, QA, pacing, clip storyboard, assets, key stills + visual audit, image-to-video, post-production edit to final episode.
+description: Use when turning a novel/web-fiction excerpt into an AI-generated vertical-platform short drama (短剧/漫剧) via a 7-step gated pipeline — adaptation, QA, pacing, clip storyboard, assets, key stills + visual audit, image-to-video.
 ---
 
-# 小说 → AI 短剧 · 八步死闸门流水线
+# 小说 → AI 短剧 · 七步死闸门流水线
 
 > 本技能是一份「编排配方」：告诉 Agent 每一步做什么、交什么、过什么闸门、哪些错误绝对不能再犯。
 > 工具无关：出图/出视频后端可以是任意画布或 API（例：LibTV 画布 + Seedance 2.0 图生视频）。具体后端参数写进项目自己的 `STYLE-LOCK.md`。
@@ -23,7 +23,7 @@ description: Use when turning a novel/web-fiction excerpt into an AI-generated v
 - **不可逆动作要授权**：生成、删除、外发都要用户明确同意；被安全审核拦下的提示词最多软化改写**一次**。
 - **省成本**：复用优先，只单张/单条重出，不整批盲刷，被拦就改词，不硬重试。
 
-## 2. 八步配方
+## 2. 七步配方
 
 | 步 | 做什么 | 模板 | 通过条件 |
 |---|---|---|---|
@@ -34,7 +34,6 @@ description: Use when turning a novel/web-fiction excerpt into an AI-generated v
 | 5 资产 | 人物白底**四视图一张合成**（正面全身/侧面/背面/正面半身）；场景、道具 | `templates/05-asset-four-view-prompt.md` | 风格锁、性别年龄、服装全对；空壳/错误资产删掉或标废 |
 | 6 关键静帧 + 目视审查 | 只出关键节拍（开场承接 / 冲突升级 / 过渡钉 / 收束），然后**逐张放大真看** | `templates/06-still-audit-checklist.md` | 每 Clip 至少 1 张 ✅ 参考图；❌ 的单张重出，再审；交用户审 |
 | 7 图生视频 | 用户说放行口令后，一 Clip（或一条拆分）= 一条视频 | `templates/07-video-prompt.template.md` | 生成前逐条勾清单；一条一条点；成片按 Clip 顺序排好 |
-| 8 后期剪辑成片 | AI 备齐素材（按序片段清单、字幕、配音台本、时间线表、封面），真人在剪辑软件精剪；加后期文字、配音、音乐、系列包装，按平台导出 | `templates/08-edit-checklist.md` | 所有片段都是 `ready` 最新终版、按 Clip 顺序；成片终检全过；用户看完整片确认 → 【成片通过】；发布要用户同意 |
 
 ### 步骤要点（展开）
 
@@ -52,23 +51,19 @@ description: Use when turning a novel/web-fiction excerpt into an AI-generated v
 
 **步骤7 图生视频**：必须图生（不能纯文生）；提示词 = 该条【粘贴区】全文（含全局一致性块）；挂 **1 张**最佳参考（最多 2 张），**不能把整组分镜都挂上**；@ 正确的人物资产（禁空壳）；台词太长就拆成连续的几条（①②③），每条写【接上一条/交给下一条】。生成前逐条勾清单，一条一条点，成片按 Clip 顺序排开、不压在图上。可以先试一集，用户看过再开后面的。
 
-**步骤8 后期剪辑成片**：先核素材：每个 Clip 标 `ready / regen / missing / stale`，文件名带 Clip 号和版本号，只让最新终版上轨。`missing` 直接跳过，不拿草稿或别的片顶替；时间线里出现剧本没有的内容，先查是不是旧草稿串进来了。然后按时间线表铺轨：去头去尾，情绪句后留半拍；关键心声和集尾钩子必须配上音、听得清；字幕只用目标语言，和台词定稿逐字核对，再对齐画面；生成时故意空着的可读文字（符文、招牌）在这里叠上去。包装用系列模板：封面集数核两遍，片头片尾复用。按目标平台导出：16:9 素材发竖屏平台就套 9:16 模糊铺底外壳。最后从头到尾连续看一遍，过完成片终检，交用户确认。AI 负责备料和粗剪，精剪可以交给人；发布由用户决定。
-
 ## 3. 台词（贯穿步骤 1/3/4/7）
 
 见 `templates/dialogue-style-guide.md`。核心：像真人说话（语气词、停顿、自问自答、改口、抢话，情绪决定句子长短）；口语化，可以适量用当下流行语（悲情、哀求、关键大喊里不用）；带情绪、心情、语气、推进剧情的句子都留，只砍重复、啰嗦和复述画面的；心声只留推进剧情的判断/动机/决定，而且要第一次听就懂；语速默认 ≤4 字/秒（15 秒 ≤60 字）。
 
 ## 4. 每步交付前的自检
 
-1. 对照项目 `ERROR-LEDGER.md`（模板 `templates/error-ledger.md` 的 G01–G20 + 你自己追加的）逐项勾。
+1. 对照项目 `ERROR-LEDGER.md`（模板 `templates/error-ledger.md` 的 G01–G15 + 你自己追加的）逐项勾。
 2. 对照 `STYLE-LOCK.md`。
 3. 有一项不过就先修，**不许带着问题进下一步**。
 
 ## 5. 不要做
 
 - 不要跳步，也不要把步骤4 纸面、步骤6 出图、步骤7 视频混在一起提前跑。
-- 不要把旧版、草稿、来源不明的片段剪进成片；缺片就是缺片，不要顶替。
-- 不要没经过用户同意就发布成片。
 - 不要在用户说放行口令前点视频生成。
 - 不要整批刷图/刷视频；被安全审核拦下不要反复硬试。
 - 不要在生成画面里要求可读文字（招牌、符文、字幕），文字后期剪辑时再加。
